@@ -20,7 +20,7 @@ struct MyTreeItem
 };
 
 //treeview数据model
-class MyTreeModel : public QAbstractItemModel
+class FluTreeModel : public QAbstractItemModel
 {
     Q_OBJECT
     QML_ELEMENT
@@ -32,7 +32,7 @@ private:
         ,FileSize
     };
 public:
-    explicit MyTreeModel(QObject *parent = nullptr);
+    explicit FluTreeModel(QObject *parent = nullptr);
 
     //需要重写的基类接口
     QModelIndex index(int row, int column,

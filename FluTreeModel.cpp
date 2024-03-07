@@ -1,11 +1,11 @@
-#include "MyTreeModel.h"
+#include "FluTreeModel.h"
 
-MyTreeModel::MyTreeModel(QObject *parent)
+FluTreeModel::FluTreeModel(QObject *parent)
     : QAbstractItemModel(parent), rootItem(new MyTreeItem)
 {
 }
 
-QModelIndex MyTreeModel::index(int row, int column, const QModelIndex &parent) const
+QModelIndex FluTreeModel::index(int row, int column, const QModelIndex &parent) const
 {
     if(!hasIndex(row, column, parent))
         return QModelIndex();
@@ -18,7 +18,7 @@ QModelIndex MyTreeModel::index(int row, int column, const QModelIndex &parent) c
     }
 }
 
-QModelIndex MyTreeModel::parent(const QModelIndex &index) const
+QModelIndex FluTreeModel::parent(const QModelIndex &index) const
 {
     if(!index.isValid()){
         return QModelIndex();
@@ -31,19 +31,19 @@ QModelIndex MyTreeModel::parent(const QModelIndex &index) const
     return createIndex(parentPtr.get()->row, 0, parentPtr.get());
 }
 
-int MyTreeModel::rowCount(const QModelIndex &parent) const
+int FluTreeModel::rowCount(const QModelIndex &parent) const
 {
     MyTreeItem *parentItem = getItem(parent);
     return parentItem->subItems.size();
 }
 
-int MyTreeModel::columnCount(const QModelIndex &parent) const
+int FluTreeModel::columnCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent)
     return 3;
 }
 
-QVariant MyTreeModel::data(const QModelIndex &index, int role) const
+QVariant FluTreeModel::data(const QModelIndex &index, int role) const
 {
     if(!index.isValid()){
         return QVariant();
@@ -62,7 +62,7 @@ QVariant MyTreeModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-QHash<int, QByteArray> MyTreeModel::roleNames() const
+QHash<int, QByteArray> FluTreeModel::roleNames() const
 {
     QHash<int, QByteArray> names = QAbstractItemModel::roleNames();
     names.insert(QHash<int, QByteArray>{
@@ -73,7 +73,7 @@ QHash<int, QByteArray> MyTreeModel::roleNames() const
     return names;
 }
 
-void MyTreeModel::resetItems()
+void FluTreeModel::resetItems()
 {
     beginResetModel();
     for(int i=0; i<10; i++)
@@ -109,7 +109,7 @@ void MyTreeModel::resetItems()
     qDebug()<<__FUNCTION__<<rowCount()<<columnCount();
 }
 
-MyTreeItem *MyTreeModel::getItem(const QModelIndex &idx) const
+MyTreeItem *FluTreeModel::getItem(const QModelIndex &idx) const
 {
     if(idx.isValid()){
         MyTreeItem *item = static_cast<MyTreeItem*>(idx.internalPointer());

@@ -1,14 +1,16 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include "MyTreeModel.h"
+#include "FluTreeModel.h"
 
 int main(int argc, char *argv[])
 {
+    qmlRegisterType<FluTreeModel>("FluentUIZ", 1, 0, "FluTreeModel");
+
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
 
-    const QUrl url(u"qrc:/TestQml_20220422_Qt6TreeView/main.qml"_qs);
+    const QUrl url(u"qrc:/main.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
         if (!obj && url == objUrl)

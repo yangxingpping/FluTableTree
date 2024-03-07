@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Controls
-import MyModel
+import FluentUIZ 1.0
 Rectangle{
     anchors.fill: parent
     color: "red"
@@ -29,7 +29,7 @@ Rectangle{
         id: control
         anchors.fill: parent
         topMargin: horizontalHeader.implicitHeight + 3
-        model: MyTreeModel {
+        model: FluTreeModel {
             id: tree_model
             Component.onCompleted: {
                 tree_model.resetItems();
